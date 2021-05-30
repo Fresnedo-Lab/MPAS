@@ -42,7 +42,7 @@ if (is.null(opt$file)){
 # library(fs)
 
 # read csv file
-coverage <- path("coverage2.csv") %>%
+coverage <- path(opt$file) %>%
   read_csv(col_names = TRUE) %>%
   mutate(reference = as.factor(reference),
          percent_coverage = percent_coverage / 100)
@@ -55,7 +55,7 @@ plots <- coverage %>%
   facet_wrap(vars(name)) +
   theme_minimal()
 
-png(file = "coverage_by_overlap2.png", width = 1000, height = 1000)
+png(file = opt$out, width = 1000, height = 1000)
 plots
 dev.off()
 
