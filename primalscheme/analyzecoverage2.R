@@ -2,7 +2,7 @@
 
 # name: analyzecoverage2.R
 # author: Daniel R. Williams
-# date: 29 May 2021
+# date: 30 May 2021
 
 # Description:
 # This script extracts coverage data from json log files.
@@ -14,7 +14,23 @@
 # for help:         Rscript analyzecoverage2.R -h
 
 if (!require("pacman")) install.packages("pacman")
-pacman::p_load(tidyverse, magrittr, fs)
+pacman::p_load(tidyverse, magrittr, fs, optparse)
+
+# Argument options
+option_list = list(
+  make_option(c("-f", "--file"), type="character", default=NULL, 
+              help="input file path", metavar="character"),
+  make_option(c("-o", "--out"), type="character", default="coverage_by_overlap.png", 
+              help="output file path [default= %default]", metavar="character")
+); 
+opt_parser = OptionParser(option_list=option_list);
+opt = parse_args(opt_parser);
+
+# errormessages for arguments
+if (is.null(opt$file)){
+  print_help(opt_parser)
+  stop("At least one argument must be supplied (input file).n", call.=FALSE)
+}
 
 # reqpacks <- c("tidyverse","magrittr","openxlsx","fs")
 # packstoinstall <- setdiff(reqpacks,installed.packages()[,1])
@@ -24,11 +40,6 @@ pacman::p_load(tidyverse, magrittr, fs)
 # library(magrittr)
 # library(openxlsx)
 # library(fs)
-
-# set working directory
-# getwd()
-# setwd("/fs/scratch/PAS1755/drw_wd/reduced_primal_by_clustal/primalscheme")
-setwd("/Users/aperium/Documents/GitHub/Primal-to-Fluidigm/primalscheme")
 
 # read csv file
 coverage <- path("coverage2.csv") %>%
