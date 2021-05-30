@@ -8,22 +8,11 @@ Run the scripts in this order:
 4. `formatcoverage.R`
 5. `analyzecoverage.R`
 
-## 1. Prepare fasta files and matching primal scheme script, and set parameters
-
-The parameters are also hard-coded in `makefastas.R` if no parameters are provided.
+## 1. Prepare fasta files
 
 ```{shell}
-# These are determined by PCR requirements. FLuidigm has strict parameters. Illumina MiSeq is less picky.
-AMPMIN=180
-AMPMAX=500
-OVERLAP=70
-INPATH="TK_Amplicons_090319.xlsx"
-SHEET=4
-NAME="Short.name"
-SEQ="seq"
-
-module load R
-Rscript makefastas.R $AMPMIN $AMPMAX $OVERLAP $INPATH $SHEET $NAME $SEQ
+# module load R
+Rscript makefastas.R -f <file.xlsx> -o <fasta_dir> -s 4 -n Short.name -q seq
 ```
 
 **Optional:** Cluster by tree output using Clustal$\Omega$. This is an optional manual process for the moment. Only really useful if some of the genes have very high sequence similarity to each other because they are homologs. Clustered genes must be similar in length or PrimalScheme will reject the cluster. Combine genes in each cluster into a single fasta file with each gene as a separate record.
