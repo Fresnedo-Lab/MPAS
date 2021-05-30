@@ -11,7 +11,7 @@
 # output: coverage data as a csv file.
 # 
 # example command:  Rscript formatcoverage2.R -d <dir> -o <file.csv>
-# for help:         Rscript makefastas.R -h
+# for help:         Rscript formatcoverage2.R -h
 
 if (!require("pacman")) install.packages("pacman")
 pacman::p_load(tidyverse, magrittr, fs, rjson, optparse)
@@ -38,10 +38,10 @@ if (is.null(opt$dir)){
 
 # make a list of all relevant json files
 jfilelist <- path("jsonlist.txt")
-jsearchpath <- path_wd(opt$dir,"overlap_*/*/*", ext = "json")
+jsearchpath <- path(opt$dir,"overlap_*/*/*", ext = "json")
 system(paste("for name in", gsub(" ", "\\\ ", jsearchpath, fixed = TRUE), "; do echo \"$name\" | sed -f / >>", jfilelist, "; done"))
 jsonfiles <- read_csv(jfilelist, col_names = FALSE) %>% .$X1
-# file_delete(jfilelist)
+file_delete(jfilelist)
 
 # extract data from all the JSON files produced by PrimalScheme
 JSONfromfile <- function(file) fromJSON(file = file)
