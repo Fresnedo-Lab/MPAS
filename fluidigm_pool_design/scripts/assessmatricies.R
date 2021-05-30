@@ -20,7 +20,7 @@ pacman::p_load(tidyverse, magrittr, fs, reshape2, optparse)
 option_list = list(
   make_option(c("-d", "--dir"), type="character", default=NULL, 
               help="input directory to search for pim files", metavar="character"),
-  make_option(c("-o", "--out"), type="character", default="pools", 
+  make_option(c("-o", "--out"), type="character", default="pairwise", 
               help="output directory [default= %default]", metavar="character")
 ); 
 opt_parser = OptionParser(option_list=option_list);
@@ -29,27 +29,19 @@ opt = parse_args(opt_parser);
 # errormessages for arguments
 if (is.null(opt$dir)){
   print_help(opt_parser)
-  stop("At least one argument must be supplied (input file).n", call.=FALSE)
+  stop("At least one argument must be supplied (input directory).n", call.=FALSE)
 }
 
-# reqpacks <- c("tidyverse","stringr","magrittr","fs","reshape2")
-# packstoinstall <- setdiff(reqpacks,installed.packages()[,1])
-# if(length(packstoinstall) > 0) install.packages(packstoinstall)
-# 
-# library(tidyverse)
-# library(stringr)
-# library(magrittr)
-# library(fs)
-# library(reshape2)
 
-# set working directory
-# getwd()
-#setwd("/fs/scratch/PAS1755/drw_wd/Primal-to-Fluidigm/fluidigm_pool_design/scripts")
-setwd("/Users/aperium/Documents/GitHub/Primal-to-Fluidigm/fluidigm_pool_design/scripts")
+inpath <- path(opt$dir)
+outpath <- path(opt$out)
+pimfilelist <- path("pimfilelist.txt")
 
-path <- path("../out/pools/clustalout/")
-
-files <- c("pool1.pim","pool2.pim")
+# files <- c("pool1.pim","pool2.pim")
+inpath <- path("/Users/aperium/Dropbox/Projects/OSU-HCS/Taraxacum/HarnessingVLHSV/Primal-to-Fluidigm_Data/fluidigm_pool_design/out/pools/clustalout")
+system(paste("ls", paste0(inpath, "/*.pim"), ">", pimfilelist))
+pimfiles <- read_csv(pimfilelist, col_names = FALSE) %>% .$X1
+file_delete(pimfilelist)
 
 # matrix1 <- read_table(files[1], col_names = FALSE, skip = 6) %>%
 #   select(-X1) %>%
@@ -71,9 +63,9 @@ files <- c("pool1.pim","pool2.pim")
 #   write_csv()
 
 
-for (i in 1:length(files)) {
+for (i in 1:length(pimfiles)) {
   # read ith file
-  matrix_i <- read_table(path(path, files[i]), col_names = FALSE, skip = 1, col_types = cols(.default = col_double(),X1 = col_character())) %>%
+  matrix_i <- read_table(path(inpath, pimfiles[i]), col_names = FALSE, skip = 1, col_types = cols(.default = col_double(),X1 = col_character())) %>%
     column_to_rownames("X1")
   names(matrix_i) <- unlist(rownames(matrix_i))
   matrix_i[!lower.tri(matrix_i)] <- NA
@@ -91,5 +83,5 @@ for (i in 1:length(files)) {
   dedupe_i %>% 
     # filter(value <100 & value >= 80) %>% 
     arrange(desc(value)) %>% 
-    write_csv(file = path(path,paste0(files,".csv")[i]))
+    write_csv(file = path(outpath,paste0(files,".csv")[i]))
 }
