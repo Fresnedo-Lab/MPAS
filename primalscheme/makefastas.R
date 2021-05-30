@@ -10,7 +10,7 @@
 # input: an xlsx workbook containing the list of sequences.
 # output: a directory containing fasta files of each sequence.
 # 
-# example command:  Rscript makefastas.R -f <file.xlsx> -o <fasta_dir> -s 4
+# example command:  Rscript makefastas.R -f <file.xlsx> -o <fasta_dir> -s 4 -n Short.name -q seq
 # for help:         Rscript makefastas.R -h
 
 
@@ -25,7 +25,11 @@ option_list = list(
   make_option(c("-o", "--out"), type="character", default="out", 
               help="output file directory [default= %default]", metavar="character"),
   make_option(c("-s", "--sheet"), type="numeric", default="1", 
-              help="sheet in workbook [default= %default]", metavar="numeric")
+              help="sheet in workbook [default= %default]", metavar="numeric"),
+  make_option(c("-n", "--name"), type="character", default="Short.name", 
+              help="name of the column with sequence names [default= %default]", metavar="character"),
+  make_option(c("-q", "--seq"), type="character", default="seq", 
+              help="name of the column with nucleotide sequences [default= %default]", metavar="character")
 ); 
 opt_parser = OptionParser(option_list=option_list);
 opt = parse_args(opt_parser);
@@ -37,10 +41,8 @@ if (is.null(opt$file)){
 }
 
 
-
 # pull commandline arguments
 # args = commandArgs(trailingOnly=TRUE)
-
 
 # set primal scheme parameters
 # if (length(args) == 0) {
@@ -59,8 +61,8 @@ if (is.null(opt$file)){
 #     seq <- args[7]
 # }
 
-name <- "Short.name"
-seq <- "seq"
+name <- opt$name
+seq <- opt$seq
 
 # read xlsx file
 inpath <- path(opt$file)
