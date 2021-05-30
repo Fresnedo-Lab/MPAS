@@ -10,7 +10,7 @@
 # input: directory to search for json files with coverage data.
 # output: coverage data as a csv file.
 # 
-# example command:  Rscript formatcoverage2.R -f <file.xlsx> -o <fasta_dir>
+# example command:  Rscript formatcoverage2.R -d <file.xlsx> -o <fasta_dir>
 # for help:         Rscript makefastas.R -h
 
 if (!require("pacman")) install.packages("pacman")
@@ -27,7 +27,7 @@ opt_parser = OptionParser(option_list=option_list);
 opt = parse_args(opt_parser);
 
 # errormessages for arguments
-if (is.null(opt$file)){
+if (is.null(opt$dir)){
   print_help(opt_parser)
   stop("At least one argument must be supplied (input directory).n", call.=FALSE)
 }
@@ -45,7 +45,7 @@ jfilelist <- path("jsonlist.txt")
 jsearchpath <- path(opt$dir,"overlap_*/*/*.json")
 system(paste("for name in", jsearchpath, "; do echo \"$name\" | sed -f / >>", jfilelist, "; done"))
 jsonfiles <- read_csv(jfilelist, col_names = FALSE) %>% .$X1
-file_delete(file = jfilelist)
+file_delete(jfilelist)
 
 # extract data from all the JSON files produced by PrimalScheme
 JSONfromfile <- function(file) fromJSON(file = file)
