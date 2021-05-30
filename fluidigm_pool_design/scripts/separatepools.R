@@ -2,7 +2,7 @@
 
 # name: separatepools.R
 # author: Daniel R. Williams
-# date: 29 May 2021
+# date: 30 May 2021
 
 # Description:
 # This script extracts coverage data from json log files.
