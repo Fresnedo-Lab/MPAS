@@ -10,7 +10,7 @@
 # input: directory to search for json files with coverage data.
 # output: coverage data as a csv file.
 # 
-# example command:  Rscript separatepools.R -d <dir> -o <file.csv>
+# example command:  Rscript separatepools.R -f <file.tsv> -o <dir>
 # for help:         Rscript separatepools.R -h
 
 if (!require("pacman")) install.packages("pacman")
@@ -18,18 +18,18 @@ pacman::p_load(tidyverse, magrittr, fs, optparse)
 
 # Argument options
 option_list = list(
-  make_option(c("-d", "--dir"), type="character", default=NULL, 
-              help="directory name to search for json files", metavar="character"),
-  make_option(c("-o", "--out"), type="character", default="coverage2.csv", 
-              help="output file name [default= %default]", metavar="character")
+  make_option(c("-f", "--file"), type="character", default=NULL, 
+              help="tsv file with list of all primers", metavar="character"),
+  make_option(c("-o", "--out"), type="character", default="pools", 
+              help="output directory [default= %default]", metavar="character")
 ); 
 opt_parser = OptionParser(option_list=option_list);
 opt = parse_args(opt_parser);
 
 # errormessages for arguments
-if (is.null(opt$dir)){
+if (is.null(opt$file)){
   print_help(opt_parser)
-  stop("At least one argument must be supplied (input directory).n", call.=FALSE)
+  stop("At least one argument must be supplied (input file).n", call.=FALSE)
 }
 
 
