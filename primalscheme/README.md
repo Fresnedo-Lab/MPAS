@@ -83,7 +83,7 @@ source /fs/scratch/PAS1755/drw_wd/primalscheme/venv/bin/activate
 primalscheme -V
 
 # execute primalscheme here...
-runprimalscheme.sh
+runprimalscheme2.sh
 
 # exit environment
 deactivate
