@@ -18,7 +18,7 @@
 if (!require("pacman")) install.packages("pacman")
 pacman::p_load(tidyverse, magrittr, stringr, openxlsx, fs, optparse)
 
-# Argument optiosn
+# Argument options
 option_list = list(
   make_option(c("-f", "--file"), type="character", default=NULL, 
               help="dataset file name", metavar="character"),
