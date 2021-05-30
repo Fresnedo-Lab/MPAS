@@ -38,7 +38,7 @@ outpath <- path(opt$out)
 pimfilelist <- path("pimfilelist.txt")
 
 # files <- c("pool1.pim","pool2.pim")
-inpath <- path("/Users/aperium/Dropbox/Projects/OSU-HCS/Taraxacum/HarnessingVLHSV/Primal-to-Fluidigm_Data/fluidigm_pool_design/out/pools/clustalout")
+# inpath <- path("/Users/aperium/Dropbox/Projects/OSU-HCS/Taraxacum/HarnessingVLHSV/Primal-to-Fluidigm_Data/fluidigm_pool_design/out/pools/clustalout")
 system(paste("ls", paste0(inpath, "/*.pim"), ">", pimfilelist))
 pimfiles <- read_csv(pimfilelist, col_names = FALSE) %>% .$X1
 file_delete(pimfilelist)
