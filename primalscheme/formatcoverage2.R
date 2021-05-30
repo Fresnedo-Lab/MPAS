@@ -42,8 +42,10 @@ if (is.null(opt$file)){
 
 # make a list of all relevant json files
 jfilelist <- path("jsonlist.txt")
-system(paste("for name in overlap_*/*/*.json; do echo \"$name\" | sed -f / >>", jfilelist, "; done"))
+jsearchpath <- path(opt$dir,"overlap_*/*/*.jso")
+system(paste("for name in", jsearchpath, "; do echo \"$name\" | sed -f / >>", jfilelist, "; done"))
 jsonfiles <- read_csv(jfilelist, col_names = FALSE) %>% .$X1
+file_delete(file = jfilelist)
 
 # extract data from all the JSON files produced by PrimalScheme
 JSONfromfile <- function(file) fromJSON(file = file)
