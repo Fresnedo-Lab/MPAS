@@ -1,3 +1,17 @@
+#!/usr/bin/env Rscript
+
+# name: analyzecoverage2.R
+# author: Daniel R. Williams
+# date: 29 May 2021
+
+# Description:
+# This script extracts coverage data from json log files.
+# 
+# input: directory to search for json files with coverage data.
+# output: coverage data as a csv file.
+# 
+# example command:  Rscript analyzecoverage2.R -f <file.csv> -o <file.png>
+# for help:         Rscript analyzecoverage2.R -h
 
 if (!require("pacman")) install.packages("pacman")
 pacman::p_load(tidyverse, magrittr, fs)

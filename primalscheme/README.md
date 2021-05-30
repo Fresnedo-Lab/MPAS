@@ -101,7 +101,7 @@ cd /fs/scratch/PAS1755/drw_wd/Primal-to-Fluidigm/primalscheme/
 # cd /Users/aperium/Documents/GitHub/Primal-to-Fluidigm/primalscheme/
 
 Rscript formatcoverage2.R -d <dir> -o <file.csv>
-Rscript analyzecoverage2.R
+Rscript analyzecoverage2.R -f <file.csv> -o <file.png>
 
 ```
 
