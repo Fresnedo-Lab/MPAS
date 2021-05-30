@@ -1,23 +1,40 @@
+#!/usr/bin/env Rscript
+
+# name: formatcoverage2.R
+# author: Daniel R. Williams
+# date: 29 May 2021
+
+# Description:
+# This script extracts coverage data from json log files.
+# 
+# input: directory to search for json files with coverage data.
+# output: coverage data as a csv file.
+# 
+# example command:  Rscript formatcoverage2.R -f <file.xlsx> -o <fasta_dir>
+# for help:         Rscript makefastas.R -h
 
 if (!require("pacman")) install.packages("pacman")
-pacman::p_load(tidyverse, magrittr, fs, rjson)
+pacman::p_load(tidyverse, magrittr, fs, rjson, optparse)
 
+# Argument options
+option_list = list(
+  make_option(c("-d", "--dir"), type="character", default=NULL, 
+              help="directory name to search for json files", metavar="character"),
+  make_option(c("-o", "--out"), type="character", default="coverage2.csv", 
+              help="output file name [default= %default]", metavar="character")
+); 
+opt_parser = OptionParser(option_list=option_list);
+opt = parse_args(opt_parser);
+
+# errormessages for arguments
+if (is.null(opt$file)){
+  print_help(opt_parser)
+  stop("At least one argument must be supplied (input directory).n", call.=FALSE)
+}
 
 # set working directory
 # setwd("/fs/scratch/PAS1755/drw_wd/reduced_primal_by_clustal/primalscheme")
-setwd("/Users/aperium/Documents/GitHub/Primal-to-Fluidigm/primalscheme")
-
-# get arguments
-# args = commandArgs(trailingOnly = TRUE)
-# if (length(args) == 0) {
-#   ampminarg <- NA
-#   ampmaxarg <- NA
-#   overlaparg <- NA 
-# } else {
-#     ampminarg <- args[1]
-#     ampmaxarg <- args[2]
-#     overlaparg <- args[3]
-# }
+# setwd("/Users/aperium/Documents/GitHub/Primal-to-Fluidigm/primalscheme")
 
 # just tests
 # fromJSON(file = "overlap_40/1_FEH_TK/1_FEH_TK.report.json")
