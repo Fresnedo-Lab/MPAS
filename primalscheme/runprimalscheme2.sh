@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# name: runprimalscheme2.sh
+# author: Daniel R. Williams
+# date: 30 May 2021
+
+# Description:
+# This script
+#
+# input: directory
+# output: 
+#
+# example command:  Rscript analyzecoverage2.R -f <file.csv> -o <file.png>
+
 # These are determined by PCR requirements. FLuidigm has strict parameters. Illumina MiSeq is less picky.
 AMPMIN=180
 AMPMAX=500
