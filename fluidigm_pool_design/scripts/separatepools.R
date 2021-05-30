@@ -32,13 +32,9 @@ if (is.null(opt$file)){
   stop("At least one argument must be supplied (input file).n", call.=FALSE)
 }
 
-
-
-outpath <- path("../out/pools")
-
 # get arguments
-args = commandArgs(trailingOnly = TRUE)
-if (length(args) == 0) infile <- path("../out/allprimers.tsv") else infile <- args[1]
+outpath <- path(opt$out)
+infile <- path(opt$file)
 
 # read tsv file
 data <- infile %>%
