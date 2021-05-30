@@ -4,11 +4,15 @@
 # author: Daniel R. Williams
 # date: 29 May 2021
 
-#
+# Description:
 # This script produces a set of fasta files, each constaining a single nucleotide sequence.
+# 
 # input: an xlsx workbook containing the list of sequences.
 # output: a directory containing fasta files of each sequence.
-#  
+# 
+# example command:  Rscript makefastas.R -f <file.xlsx> -o <fasta_dir> -s 4
+# for help:         Rscript makefastas.R -h
+
 
 # Load packages
 if (!require("pacman")) install.packages("pacman")
