@@ -5,7 +5,7 @@
 # date: 30 May 2021
 
 # Description:
-# This script extracts coverage data from json log files.
+# This script turns the pim matricies into pairwise comparisons.
 # 
 # input: directory to search for json files with coverage data.
 # output: coverage data as a csv file.
@@ -43,29 +43,12 @@ system(paste("ls", paste0(inpath, "/*.pim"), ">", pimfilelist))
 pimfiles <- read_csv(pimfilelist, col_names = FALSE) %>% .$X1
 file_delete(pimfilelist)
 
-# matrix1 <- read_table(files[1], col_names = FALSE, skip = 6) %>%
-#   select(-X1) %>%
-#   column_to_rownames("X2")
-# names(matrix1) <- unlist(rownames(matrix1))
-# matrix1[!lower.tri(matrix1)] <- NA
-# 
-# 
-# melted1 <- matrix1 %>%  
-#   as.matrix() %>%
-#   melt()
-# 
-# dedupe1 <- melted1 %>%
-#   filter(!is.na(value), Var1 != Var2)
-# 
-# dedupe1 %>% 
-#   # filter(value <100 & value >= 80) %>% 
-#   arrange(desc(value)) %>% 
-#   write_csv()
 
+dir_create(outpath)
 
 for (i in 1:length(pimfiles)) {
   # read ith file
-  matrix_i <- read_table(path(inpath, pimfiles[i]), col_names = FALSE, skip = 1, col_types = cols(.default = col_double(),X1 = col_character())) %>%
+  matrix_i <- read_table(path(pimfiles[i]), col_names = FALSE, skip = 1, col_types = cols(.default = col_double(),X1 = col_character())) %>%
     column_to_rownames("X1")
   names(matrix_i) <- unlist(rownames(matrix_i))
   matrix_i[!lower.tri(matrix_i)] <- NA
@@ -83,5 +66,5 @@ for (i in 1:length(pimfiles)) {
   dedupe_i %>% 
     # filter(value <100 & value >= 80) %>% 
     arrange(desc(value)) %>% 
-    write_csv(file = path(outpath,paste0(files,".csv")[i]))
+    write_csv(file = path(outpath, paste0(basename(pimfiles),".csv")[i]))
 }
