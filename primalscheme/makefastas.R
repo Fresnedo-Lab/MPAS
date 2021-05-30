@@ -1,10 +1,18 @@
+#!/usr/bin/env Rscript
+
+# author: Daniel R. Williams
+# date: 29 May 2021
+
 if (!require("pacman")) install.packages("pacman")
 pacman::p_load(tidyverse, magrittr, stringr, openxlsx, fs)
 
 # set working directory
 # getwd()
 # setwd("/fs/scratch/PAS1755/drw_wd/Primal-to-Fluidigm/primalscheme/")
-setwd("/Users/aperium/Documents/GitHub/Primal-to-Fluidigm/primalscheme")
+#setwd("/Users/aperium/Documents/GitHub/Primal-to-Fluidigm/primalscheme")
+
+# pull commandline arguments
+args = commandArgs(trailingOnly=TRUE)
 
 # set primal scheme parameters
 args = commandArgs(trailingOnly = TRUE)
