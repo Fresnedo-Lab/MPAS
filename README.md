@@ -14,6 +14,8 @@ Some areas require substantial work to make this perform as a polished pipeline.
 
 ## Workflow Summary
 
+![workflowdiagram](README.assets/workflowdiagram.jpg)
+
 1. Clustering of homologous sequences
 
    1. Generate a list of genomic sequences as fasta files.
