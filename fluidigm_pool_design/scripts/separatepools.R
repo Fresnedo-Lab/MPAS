@@ -1,9 +1,38 @@
-if (!require("pacman")) install.packages("pacman")
-pacman::p_load(tidyverse, magrittr, fs)
+#!/usr/bin/env Rscript
 
-# set working directory
-#setwd("/fs/scratch/PAS1755/drw_wd/Primal-to-Fluidigm/fluidigm_pool_design/scripts")
-setwd("/Users/aperium/Documents/GitHub/Primal-to-Fluidigm/fluidigm_pool_design/scripts")
+# name: separatepools.R
+# author: Daniel R. Williams
+# date: 29 May 2021
+
+# Description:
+# This script extracts coverage data from json log files.
+# 
+# input: directory to search for json files with coverage data.
+# output: coverage data as a csv file.
+# 
+# example command:  Rscript separatepools.R -d <dir> -o <file.csv>
+# for help:         Rscript separatepools.R -h
+
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(tidyverse, magrittr, fs, optparse)
+
+# Argument options
+option_list = list(
+  make_option(c("-d", "--dir"), type="character", default=NULL, 
+              help="directory name to search for json files", metavar="character"),
+  make_option(c("-o", "--out"), type="character", default="coverage2.csv", 
+              help="output file name [default= %default]", metavar="character")
+); 
+opt_parser = OptionParser(option_list=option_list);
+opt = parse_args(opt_parser);
+
+# errormessages for arguments
+if (is.null(opt$dir)){
+  print_help(opt_parser)
+  stop("At least one argument must be supplied (input directory).n", call.=FALSE)
+}
+
+
 
 outpath <- path("../out/pools")
 
