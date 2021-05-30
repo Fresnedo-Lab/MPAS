@@ -4,6 +4,12 @@
 
 2. `separatepools.R` separates primers into unique csv and fasta files by pool designation.
 
+   ```shell
+   Rscript separatepools.R -f <file.tsv> -o <dir>
+   ```
+
+   
+
 3. Submit each pool separately to clustal omega for identity analysis.
 
    - Install ClustalOmega?
