@@ -3,10 +3,9 @@
 Run the scripts in this order:
 
 1. `makefastas.R`
-2. `runprimalscheme.sh`
-3. `grepcoverage.sh`
-4. `formatcoverage.R`
-5. `analyzecoverage.R`
+2. `runprimalscheme2.sh`
+4. `formatcoverage2.R`
+5. `analyzecoverage2.R`
 
 ## 1. Prepare fasta files
 
