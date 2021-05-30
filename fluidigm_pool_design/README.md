@@ -102,6 +102,12 @@
 
 4. `assessmatricies.R` processes clustal omega results into a pairwise comparison of primer identity.
 
+   ```shell
+   Rscript assessmatricies.R -d <in_dir> -o <out_dir>
+   ```
+
+   
+
 5. Split primary pools (designed by primalsceme) into secondary and tertiary pools to minimize identity while keeping pairs together.
 
    - [ ] write a script to automate this: `splitpools.R`
