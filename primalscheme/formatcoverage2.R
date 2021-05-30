@@ -10,7 +10,7 @@
 # input: directory to search for json files with coverage data.
 # output: coverage data as a csv file.
 # 
-# example command:  Rscript formatcoverage2.R -d <file.xlsx> -o <fasta_dir>
+# example command:  Rscript formatcoverage2.R -d <dir> -o <file.csv>
 # for help:         Rscript makefastas.R -h
 
 if (!require("pacman")) install.packages("pacman")
@@ -32,18 +32,14 @@ if (is.null(opt$dir)){
   stop("At least one argument must be supplied (input directory).n", call.=FALSE)
 }
 
-# set working directory
-# setwd("/fs/scratch/PAS1755/drw_wd/reduced_primal_by_clustal/primalscheme")
-# setwd("/Users/aperium/Documents/GitHub/Primal-to-Fluidigm/primalscheme")
-
 # just tests
 # fromJSON(file = "overlap_40/1_FEH_TK/1_FEH_TK.report.json")
 # jsonfiles <- path("overlap_40/1_FEH_TK/1_FEH_TK.report.json")
 
 # make a list of all relevant json files
 jfilelist <- path("jsonlist.txt")
-jsearchpath <- path(opt$dir,"overlap_*/*/*.json")
-system(paste("for name in", jsearchpath, "; do echo \"$name\" | sed -f / >>", jfilelist, "; done"))
+jsearchpath <- path_wd(opt$dir,"overlap_*/*/*", ext = "json")
+system(paste("for name in", gsub(" ", "\\\ ", jsearchpath, fixed = TRUE), "; do echo \"$name\" | sed -f / >>", jfilelist, "; done"))
 jsonfiles <- read_csv(jfilelist, col_names = FALSE) %>% .$X1
 # file_delete(jfilelist)
 
