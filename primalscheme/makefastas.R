@@ -3,32 +3,51 @@
 # author: Daniel R. Williams
 # date: 29 May 2021
 
+# Load packages
 if (!require("pacman")) install.packages("pacman")
-pacman::p_load(tidyverse, magrittr, stringr, openxlsx, fs)
+pacman::p_load(tidyverse, magrittr, stringr, openxlsx, fs, optparse)
 
-# set working directory
-# getwd()
-# setwd("/fs/scratch/PAS1755/drw_wd/Primal-to-Fluidigm/primalscheme/")
-#setwd("/Users/aperium/Documents/GitHub/Primal-to-Fluidigm/primalscheme")
+# Argument optiosn
+option_list = list(
+  make_option(c("-f", "--file"), type="character", default=NULL, 
+              help="dataset file name", metavar="character"),
+  make_option(c("-o", "--out"), type="character", default="out", 
+              help="output file directory [default= %default]", metavar="character")
+); 
+opt_parser = OptionParser(option_list=option_list);
+opt = parse_args(opt_parser);
+
+# errormessages for arguments
+if (is.null(opt$file)){
+  print_help(opt_parser)
+  stop("At least one argument must be supplied (input file).n", call.=FALSE)
+}
+if (is.null(opt$out)){
+  print_help(opt_parser)
+  stop("At least one argument must be supplied (output directory).n", call.=FALSE)
+}
+
+
+
 
 # pull commandline arguments
 args = commandArgs(trailingOnly=TRUE)
 
+# set file path
+inpath <- path(args[1])
+
 # set primal scheme parameters
-args = commandArgs(trailingOnly = TRUE)
 if (length(args) == 0) {
   ampmin <- 180
   ampmax <- 500
   overlap <- 70 
-  inpath <- path("TK_Amplicons_090319.xlsx")
   sheet <- 4
   name <- "Short.name"
   seq <- "seq"
 } else {
-    ampmin <- args[1]
-    ampmax <- args[2]
-    overlap <- args[3]
-    inpath <- path(args[4])
+    ampmin <- args[2]
+    ampmax <- args[3]
+    overlap <- args[4]
     sheet <- args[5]
     name <- args[6]
     seq <- args[7]
