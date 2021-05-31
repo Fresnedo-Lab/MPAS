@@ -21,9 +21,11 @@ set -e -u -o pipefail
 # example command:
 
 # TODO: I want to pass all arguments exactly as they are with their flags to the runprimalscheme2.sh script.
+allargs=$@
+bash runprimalscheme2.sh "$allargs"
 
 # move to directory
-cd /fs/scratch/PAS1755/drw_wd/Primal-to-Fluidigm/primalscheme
+#cd /fs/scratch/PAS1755/drw_wd/Primal-to-Fluidigm/primalscheme
 
 # open correct python env
 module load python/3.7-2019.10
@@ -34,11 +36,11 @@ echo "Starting runprimalscheme.sh script..."  # Report what script is being run
 echo -e "---------\n\n"           # Separate from program output
 
 # move to directory
-cd /fs/scratch/PAS1755/drw_wd/Primal-to-Fluidigm/primalscheme
+#cd /fs/scratch/PAS1755/drw_wd/Primal-to-Fluidigm/primalscheme
 
 # execute primalscheme here...
 # bash runprimalscheme.sh
-bash runprimalscheme2.sh
+bash runprimalscheme2.sh $allargs
 
 echo -e "\n---------\nAll done!"  # Separate from program output
 date                              # Report date+time to time script
