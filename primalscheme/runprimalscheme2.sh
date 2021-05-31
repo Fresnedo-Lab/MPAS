@@ -16,8 +16,17 @@
 AMPMIN=180
 AMPMAX=500
 
+# Default parameters
+unset in_dir
+out_dir="out"
+ampmin=180
+ampmax=500
+minoverlap=70
+maxoverlap=70
+incrementoverlap=5
 
-while getopts d:o:a:b:p:q:r flag
+# Get options from compand line arguments. d is requrired.
+while getopts d:o:a:b:p:q:r: flag
 do
     case "${flag}" in
         d) in_dir=${OPTARG};;
@@ -27,6 +36,9 @@ do
         p) minoverlap=${OPTARG};;
         q) maxoverlap=${OPTARG};;
         r) incrementoverlap=${OPTARG};;
+        \?) echo "Unknown option: -$OPTARG" >&2; exit 1;;
+        :) echo "Missing option argument for -$OPTARG" >&2; exit 1;;
+        *) echo "Unimplemented option: -$OPTARG" >&2; exit 1;;
     esac
 done
 
