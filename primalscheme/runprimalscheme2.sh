@@ -56,7 +56,8 @@ LIST=$(ls "$in_dir" | awk 'BEGIN {FS = "."}{ORS = " "} {print $1}')
 # OVERLAPS=(40 45 50 55 60 65 70 75 80 85 90)
 OVERLAPS=$(seq -s " " "$minoverlap" "$incrementoverlap" "$maxoverlap")
 
-for OVERLAP in ${OVERLAPS[@]}; do mkdir overlap_$OVERLAP; for GENE in ${LIST[@]}; do primalscheme multiplex -a $ampmin -a $ampmax -n $GENE -t $OVERLAP -o overlap_$OVERLAP/$GENE -f fastas/$GENE.fasta; done; done
+mkdir $out_dir
+for OVERLAP in ${OVERLAPS[@]}; do mkdir ${out_dir}/overlap_$OVERLAP; for GENE in ${LIST[@]}; do primalscheme multiplex -a $ampmin -a $ampmax -n $GENE -t $OVERLAP -o ${out_dir}/overlap_$OVERLAP/$GENE -f fastas/$GENE.fasta; done; done
 
 exit
 
