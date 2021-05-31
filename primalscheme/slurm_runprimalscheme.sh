@@ -8,6 +8,20 @@ set -e -u -o pipefail
 # first time running with the full set of 7 overlaps * 106 fastas took 116 minutes
 # set clocktime for 147*11*1.2 for a 20% margin of error in the calculation
 
+# name: slurm_runprimalscheme.sh
+# author: Daniel R. Williams
+# date: 30 May 2021
+
+# Description:
+# This script run runprimalscheme2.sh on SLURM at OSC
+#
+# input:
+# output:
+#
+# example command:
+
+# TODO: I want to pass all arguments exactly as they are with their flags to the runprimalscheme2.sh script.
+
 # move to directory
 cd /fs/scratch/PAS1755/drw_wd/Primal-to-Fluidigm/primalscheme
 

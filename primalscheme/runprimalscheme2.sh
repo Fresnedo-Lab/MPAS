@@ -10,7 +10,7 @@
 # input: directory to search for fasta files, other parameters.
 # output: directory with tsv, bed, and json files produced from primalscheme.
 #
-# example command:  Rscript runprimalscheme2.sh -d <in_dir> -o <out_dir>
+# example command:  shell runprimalscheme2.sh -d <in_dir> -o <out_dir>
 
 # These are determined by PCR requirements. FLuidigm has strict parameters. Illumina MiSeq is less picky.
 
