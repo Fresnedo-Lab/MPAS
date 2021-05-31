@@ -15,10 +15,10 @@ set -e -u -o pipefail
 # Description:
 # This script run runprimalscheme2.sh on SLURM at OSC
 #
-# input:
-# output:
+# input: input directory to find fasta files
+# output: directory with tsv, bed, and json files produced from primalscheme.
 #
-# example command:
+# example command: shell runprimalscheme2.sh -d <in_dir> -o <out_dir>
 
 
 # move to directory
