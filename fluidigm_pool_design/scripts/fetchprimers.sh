@@ -55,8 +55,8 @@ set -- $LIST
 
 
 # fill the new file with the primer data and clean up the "gene" and "name" columns
-awk 'BEGIN{FS="\t|/"}{OFS="\t"}{print $5,$7,$8,$9,$10,$11,$12}' "${FILE}.tmp" >> "${FILE}"
+awk 'BEGIN{FS="\t|/|.primer.tsv"}{OFS="\t"}{print $(NF-7),$(NF-5),$(NF-4),$(NF-3),$(NF-2),$(NF-1),$NF}' "${FILE}.tmp" >> "${FILE}"
 
 
 # delete the temporary file
-#rm "${FILE}.tmp"
+rm "${FILE}.tmp"
