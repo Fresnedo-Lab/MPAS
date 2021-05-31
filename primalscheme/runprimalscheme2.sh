@@ -7,14 +7,29 @@
 # Description:
 # This script
 #
-# input: directory
-# output: 
+# input: directory to search for fasta files, other parameters.
+# output: directory with tsv, bed, and json files produced from primalscheme.
 #
-# example command:  Rscript analyzecoverage2.R -f <file.csv> -o <file.png>
+# example command:  Rscript runprimalscheme2.sh -d <in_dir> -o <out_dir>
 
 # These are determined by PCR requirements. FLuidigm has strict parameters. Illumina MiSeq is less picky.
 AMPMIN=180
 AMPMAX=500
+
+
+while getopts d:o:a:b:p:q:r flag
+do
+    case "${flag}" in
+        d) in_dir=${OPTARG};;
+        o) out_dir=${OPTARG};;
+        a) ampmin=${OPTARG};;
+        b) ampmax=${OPTARG};;
+        p) minoverlap=${OPTARG};;
+        q) maxoverlap=${OPTARG};;
+        r) incrementoverlap=${OPTARG};;
+    esac
+done
+
 
 # This fastas named in the list with specified overlaps
 LIST=($(ls fastas | awk 'BEGIN {FS = "."}{ORS = " "} {print $1}'))
