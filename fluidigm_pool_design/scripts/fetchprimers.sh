@@ -32,17 +32,18 @@ done
 # cd /Users/aperium/Documents/GitHub/Primal-to-Fluidigm/fluidigm_pool_design/scripts
 # cd
 
-mkdir ../out
+#mkdir ../out
 
 # set file name and clear existing file
-FILE=../out/allprimers.tsv
+FILE="${out}"
 if test -f "$FILE"; then
 	rm $FILE
 fi
 
-
+# TODO: this stuff.
 # pull all of the primalscheme primers into a temporary file
-LIST=(../../primalscheme/overlap_70/*/*.primer.tsv)
+#LIST=(../../primalscheme/overlap_70/*/*.primer.tsv)
+LIST=$(ls ${dir}/*/*.primer.tsv)
 for name in ${LIST[@]}; do
 	(awk 'BEGIN{FS = "\t"}{OFS="\t"}NR>1{print FILENAME,$1,$2,$3,$4,$5,$6}' $name) >> $FILE.tmp
 done
