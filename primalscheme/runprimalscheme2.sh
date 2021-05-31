@@ -51,13 +51,10 @@ done
 
 # This fastas named in the list with specified overlaps
 # List of gene/sequence names
-LIST=($(ls "$in_dir" | awk 'BEGIN {FS = "."}{ORS = " "} {print $1}'))
-echo "LIST=" $LIST
+LIST=$(ls "$in_dir" | awk 'BEGIN {FS = "."}{ORS = " "} {print $1}')
 
 # OVERLAPS=(40 45 50 55 60 65 70 75 80 85 90)
-# OVERLAPS=$(echo {"$minoverlap".."$maxoverlap".."$incrementoverlap"})
 OVERLAPS=$(seq -s " " "$minoverlap" "$incrementoverlap" "$maxoverlap")
-#echo $OVERLAPS
 
 for OVERLAP in ${OVERLAPS[@]}; do mkdir overlap_$OVERLAP; for GENE in ${LIST[@]}; do primalscheme multiplex -a $ampmin -a $ampmax -n $GENE -t $OVERLAP -o overlap_$OVERLAP/$GENE -f fastas/$GENE.fasta; done; done
 
