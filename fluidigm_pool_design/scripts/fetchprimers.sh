@@ -1,6 +1,35 @@
-# get the primers form primal scheme into a single file with the names of the genes
+#!/bin/bash
 
-cd /Users/aperium/Documents/GitHub/Primal-to-Fluidigm/fluidigm_pool_design/scripts
+# name: runprimalscheme2.sh
+# author: Daniel R. Williams
+# date: 30 May 2021
+
+# Description:
+# This script gets the primers form primal scheme into a single file with the names of the genes
+#
+#
+# input:
+# output:
+#
+# example command:  shell fetchprimes.sh -d <in_dir> -o <out.tsv>
+
+# Default parameters
+unset in_dir
+out="out.tsv"
+
+# Get options from compand line arguments. d is requrired.
+while getopts d:o: flag
+do
+    case "${flag}" in
+        d) dir=${OPTARG};;
+        o) out=${OPTARG};;
+#        \?) echo "Unknown option: -$OPTARG" >&2; exit 1;;
+#        :) echo "Missing option argument for -$OPTARG" >&2; exit 1;;
+#        *) echo "Unimplemented option: -$OPTARG" >&2; exit 1;;
+    esac
+done
+
+# cd /Users/aperium/Documents/GitHub/Primal-to-Fluidigm/fluidigm_pool_design/scripts
 # cd
 
 mkdir ../out
