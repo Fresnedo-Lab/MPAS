@@ -59,4 +59,4 @@ awk 'BEGIN{FS="\t|/"}{OFS="\t"}{print $5,$7,$8,$9,$10,$11,$12}' "${FILE}.tmp" >>
 
 
 # delete the temporary file
-rm "${FILE}.tmp"
+#rm "${FILE}.tmp"
