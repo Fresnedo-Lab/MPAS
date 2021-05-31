@@ -34,27 +34,30 @@ do
         p) minoverlap=${OPTARG};;
         q) maxoverlap=${OPTARG};;
         r) incrementoverlap=${OPTARG};;
-        \?) echo "Unknown option: -$OPTARG" >&2; exit 1;;
-        :) echo "Missing option argument for -$OPTARG" >&2; exit 1;;
-        *) echo "Unimplemented option: -$OPTARG" >&2; exit 1;;
+#        \?) echo "Unknown option: -$OPTARG" >&2; exit 1;;
+#        :) echo "Missing option argument for -$OPTARG" >&2; exit 1;;
+#        *) echo "Unimplemented option: -$OPTARG" >&2; exit 1;;
     esac
 done
+# shift $OPTIND-1
 
 # Checks for mandatory argument
-if ! [[ -d $1 ]]
-then
-    echo "-d <in_dir> must be included" >&2
-    exit 1
-fi
+#if ! [[ -d $1 ]]
+#then
+#    echo "-d <in_dir> must be included" >&2
+#    exit 1
+#fi
 
 
 # This fastas named in the list with specified overlaps
 # List of gene/sequence names
-LIST=($(ls $in_dir | awk 'BEGIN {FS = "."}{ORS = " "} {print $1}'))
+LIST=($(ls "$in_dir" | awk 'BEGIN {FS = "."}{ORS = " "} {print $1}'))
+echo "LIST=" $LIST
 
-
-OVERLAPS=(40 45 50 55 60 65 70 75 80 85 90)
-
+# OVERLAPS=(40 45 50 55 60 65 70 75 80 85 90)
+# OVERLAPS=$(echo {"$minoverlap".."$maxoverlap".."$incrementoverlap"})
+OVERLAPS=$(seq -s " " "$minoverlap" "$incrementoverlap" "$maxoverlap")
+#echo $OVERLAPS
 
 for OVERLAP in ${OVERLAPS[@]}; do mkdir overlap_$OVERLAP; for GENE in ${LIST[@]}; do primalscheme multiplex -a $ampmin -a $ampmax -n $GENE -t $OVERLAP -o overlap_$OVERLAP/$GENE -f fastas/$GENE.fasta; done; done
 
