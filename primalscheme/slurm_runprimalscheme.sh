@@ -20,9 +20,6 @@ set -e -u -o pipefail
 #
 # example command:
 
-# TODO: I want to pass all arguments exactly as they are with their flags to the runprimalscheme2.sh script.
-allargs=$@
-bash runprimalscheme2.sh "$allargs"
 
 # move to directory
 #cd /fs/scratch/PAS1755/drw_wd/Primal-to-Fluidigm/primalscheme
@@ -39,8 +36,8 @@ echo -e "---------\n\n"           # Separate from program output
 #cd /fs/scratch/PAS1755/drw_wd/Primal-to-Fluidigm/primalscheme
 
 # execute primalscheme here...
-# bash runprimalscheme.sh
-bash runprimalscheme2.sh $allargs
+# amd pass all arguments exactly as they are with their flags
+bash runprimalscheme2.sh "${@}"
 
 echo -e "\n---------\nAll done!"  # Separate from program output
 date                              # Report date+time to time script
