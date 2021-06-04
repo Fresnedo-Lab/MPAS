@@ -134,3 +134,8 @@
 
    - It should be relatively easy to implement in R using tidyverse. Can only hope R will be able to handle it relatively quickly.
 
+   - Two new thoughts: 
+
+     1. Is it really necessary to start with the pools designed by Primal Scheme separated into complexly different forests? What if I weight edges connecting primers of overlapping amplicons extremely high to make sure they are separated?
+     2. If I’m only using the minimal spanning edges, is it possible I’ll be including primer pairs with high identity in the same trees, just connected by low weight edges? Should I instead be constructing a maximal spanning tree before trimming edges over the threshold? If I did that how would I make sure primer pairs are in the same tree?
+
