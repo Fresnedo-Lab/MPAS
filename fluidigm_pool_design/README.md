@@ -151,4 +151,6 @@
             - There is a way to make the spanning forest as optimal as the trimmed MST minimum spanning forest. I just need to check all of the separate incidence matrices for the optimal match instead of adding it to the first tree below the threshold. The search can be limited to the first $n$ trees.
             - **Actually this might be the only way to make a non-redundant forest where each tree is in a separate incidence matrix.**
           - I think there is third approach more like Kruskal’s. It's a conditional on step 3 in the figure. A search through all the vertices connecting the new vertex to the … never mind. It would require the algorithm to know how the vertices are connected in the growing forest, a much easier task for a human than the algorithm.
+          - But there is another potentially very different approach that models the network more like astronomical bodies. Start with the complete graph. Apply gravitational forces such that another over the threshold is repulsive and anything under the threshold is attractive. Use an inverse square law to encourage clustering of systems. Cut systems apart when all the lengths within a system is less than the distance to any other system?
+            - Idea: start with a maximum spanning search busting a forest of single-vertex trees… nope. 
 
