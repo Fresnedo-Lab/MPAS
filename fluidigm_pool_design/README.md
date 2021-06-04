@@ -138,4 +138,11 @@
 
      1. Is it really necessary to start with the pools designed by Primal Scheme separated into complexly different forests? What if I weight edges connecting primers of overlapping amplicons extremely high to make sure they are separated?
      2. If I’m only using the minimal spanning edges, is it possible I’ll be including primer pairs with high identity in the same trees, just connected by low weight edges? Should I instead be constructing a maximal spanning tree before trimming edges over the threshold? If I did that how would I make sure primer pairs are in the same tree?
+        - The minimal spanning tree approach assumes transitivity of identity between primers. I think this is a bad assumption. Imagine a network of three 20 bp primers: two share 95% identity and the third is 50% similar both of the others, matching 10 of the 19 shared bases.
+        - Related concepts to review:
+          -  [Transitive relation](https://en.wikipedia.org/wiki/Transitive_relation) 
+          -  [Intransitivity](https://en.wikipedia.org/wiki/Intransitivity) 
+          -  [Arc-transitive graph](https://en.wikipedia.org/wiki/Arc-transitive_graph) 
+          -  [Edge-transitive graph](https://en.wikipedia.org/wiki/Edge-transitive_graph) 
+          -  [Vertex-transitive graph](https://en.wikipedia.org/wiki/Vertex-transitive_graph) 
 
