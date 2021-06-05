@@ -7,7 +7,7 @@
 # Description:
 # This script 
 # 
-# input: directory to search for .pim.csv files with coverage data.
+# input: directory with .pim.csv files containing the pairwise comparisons.
 # output: a directory with fasta files of new pools
 # 
 # example command:  Rscript splitpools.R -d <in_dir> -o <out_dir>
@@ -35,6 +35,10 @@ if (is.null(opt$dir)){
 inpath <- path(opt$dir)
 outpath <- path(opt$out)
 pimcsvfilelist <- path("pimcsvfilelist.txt")
+
+# for testing
+inpath <- path("/Users/aperium/Dropbox/Projects/OSU-HCS/Taraxacum/HarnessingVLHSV/Primal-to-Fluidigm_Data/fluidigm_pool_design/out/pools/clustalout")
+outath <- path("/Users/aperium/Dropbox/Projects/OSU-HCS/Taraxacum/HarnessingVLHSV/Primal-to-Fluidigm_Data/fluidigm_pool_design/out/pools/clustalout/test")
 
 system(paste("ls", paste0(inpath, "/*.pim.csv"), ">", pimcsvfilelist))
 pimcsvfiles <- read_csv(pimcsvfilelist, col_names = FALSE) %>% .$X1
