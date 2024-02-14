@@ -87,7 +87,7 @@ Some areas require substantial work to make this perform as a polished pipeline.
 
 ```bash
 # OSC
-/fs/scratch/PAS1755/drw_wd/Primal-to-Fluidigm
+/fs/scratch/PAS1755/$MYDIR/Primal-to-Fluidigm
 
 # Personal computer
 /Users/$USER/Documents/GitHub/MPAS
